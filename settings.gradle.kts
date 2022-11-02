@@ -11,10 +11,10 @@ if (System.getenv("JITPACK") == "true") {
 }
 
 pluginManagement {
+    plugins {
+        id("com.github.johnrengelman.shadow") version "7.1.2" apply false
+    }
     repositories {
         gradlePluginPortal()
-    }
-    plugins {
-        id("com.gradle.plugin-publish") version "1.0.0"
     }
 }

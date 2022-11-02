@@ -2,8 +2,6 @@ package com.vjh0107.barcode.buildscripts.bukkitexecutor
 
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.provider.Property
-import org.gradle.api.tasks.Input
-import org.gradle.api.tasks.TaskProvider
 import org.gradle.api.tasks.bundling.AbstractArchiveTask
 
 abstract class BukkitExecutorExtension {
