@@ -2,6 +2,8 @@ rootProject.name = "BarcodeGradlePlugins"
 
 val modulesDir = "plugins"
 
+include("project-extensions")
+
 if (System.getenv("JITPACK") == "true") {
     include("plugins:common")
 } else {
