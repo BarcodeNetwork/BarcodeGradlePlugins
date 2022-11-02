@@ -1,0 +1,9 @@
+.gradle/
+.idea/
+/build_outputs/
+publish.gradle.kts
+.DS_Store
+
+# build 를 패키지명으로 사용하지 마세요.
+build/
+**/build/
