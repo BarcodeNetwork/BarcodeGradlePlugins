@@ -2,8 +2,12 @@ rootProject.name = "BarcodeGradlePlugins"
 
 val modulesDir = "plugins"
 
-file("${rootProject.projectDir.path}/${modulesDir.replace(":", "/")}/").listFiles()?.forEach { modulePath ->
-    include("${modulesDir.replace("/", ":")}:${modulePath.name}")
+if (System.getenv("JITPACK") == "true") {
+    include("plugins:common")
+} else {
+    file("${rootProject.projectDir.path}/${modulesDir.replace(":", "/")}/").listFiles()?.forEach { modulePath ->
+        include("${modulesDir.replace("/", ":")}:${modulePath.name}")
+    }
 }
 
 pluginManagement {
