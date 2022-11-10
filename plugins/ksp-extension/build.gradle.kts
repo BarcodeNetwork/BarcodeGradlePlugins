@@ -10,14 +10,17 @@ tasks.shadowJar {
     archiveClassifier.set("")
 }
 
-val kotlinVersion = loadProperties(rootProject.projectDir.path + "/gradle.properties").getProperty("kotlinVersion")
+val properties = loadProperties(rootProject.projectDir.path + "/gradle.properties")
+val kotlinVersion = properties.getProperty("kotlinVersion")
+val kspVersion = properties.getProperty("kspVersion")
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+    implementation("com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin:$kspVersion")
     implementation("com.github.BarcodeNetwork.BarcodeGradlePlugins:buildscripts-common:1.1.0")
 }
 
-version = "1.0.1"
+version = "1.0.2"
 group = "com.vjh0107"
 
 gradlePlugin {

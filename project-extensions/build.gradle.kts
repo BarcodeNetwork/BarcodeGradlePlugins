@@ -8,7 +8,7 @@ repositories {
 }
 
 group = "com.vjh0107.barcode"
-version = "1.0.1"
+version = "1.1.2"
 
 publishing {
     publications {

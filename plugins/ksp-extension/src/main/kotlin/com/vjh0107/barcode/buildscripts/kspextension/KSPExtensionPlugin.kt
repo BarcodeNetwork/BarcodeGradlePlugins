@@ -12,13 +12,22 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformJvmPlugin
 class KSPExtensionPlugin : Plugin<Project> {
     companion object {
         private const val KOTLIN = "org.jetbrains.kotlin:kotlin-jvm"
+        private const val KSP = "com.google.devtools.ksp"
     }
-    override fun apply(target: Project) {
+    private fun init(target: Project) {
         with(target) {
             if (!pluginManager.hasPlugin(KOTLIN)) {
                 project.pluginManager.apply(KotlinPlatformJvmPlugin::class)
             }
+            if (!pluginManager.hasPlugin(KSP)) {
+                project.plugins.apply(KSP)
+            }
+        }
+    }
 
+    override fun apply(target: Project) {
+        with(target) {
+            init(this)
             val configure: KotlinJvmProjectExtension.() -> Unit = {
                 sourceSets.main {
                     kotlin.srcDir("build/generated/ksp/main/kotlin")

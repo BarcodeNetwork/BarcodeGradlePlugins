@@ -7,16 +7,8 @@ import com.vjh0107.projectextensions.internal.project
 
 private val transitive = Action<ExternalModuleDependency> { isTransitive = false }
 
-/**
- * 의존 대상의 의존성을 제외하고 의존한다.
- */
 fun DependencyHandler.compileOnlyTransitively(dependencyNotation: String): ExternalModuleDependency {
-    return addDependencyTo(
-        this,
-        "compileOnly",
-        dependencyNotation,
-        configurationAction = transitive
-    )
+    return addDependencyTo(this, "compileOnly", dependencyNotation, configurationAction = transitive)
 }
 
 fun DependencyHandler.compileOnlyModule(module: ModuleNotation): Dependency? {
@@ -24,13 +16,19 @@ fun DependencyHandler.compileOnlyModule(module: ModuleNotation): Dependency? {
 }
 
 fun DependencyHandler.compileOnlyModuleAll(module: DependencySet<ModuleNotation>) {
-    module.getDependencies().forEach {
-        add("compileOnly", project(it.path))
-    }
+    module.getDependencies().forEach { add("compileOnly", project(it.path)) }
 }
 
 fun DependencyHandler.implementationModule(module: ModuleNotation): Dependency? {
     return add("implementation", project(module.path))
+}
+
+fun DependencyHandler.apiModule(module: ModuleNotation): Dependency? {
+    return add("api", project(module.path))
+}
+
+fun DependencyHandler.apiModuleAll(module: DependencySet<ModuleNotation>) {
+    module.getDependencies().forEach { add("api", project(it.path)) }
 }
 
 fun DependencyHandler.testImplementationModule(module: ModuleNotation): Dependency? {
@@ -38,23 +36,17 @@ fun DependencyHandler.testImplementationModule(module: ModuleNotation): Dependen
 }
 
 fun DependencyHandler.implementationAll(dependencySet: DependencySet<String>) {
-    dependencySet.getDependencies().forEach {
-        add("implementation", it)
-    }
+    dependencySet.getDependencies().forEach { add("implementation", it) }
+}
+
+fun DependencyHandler.apiAll(dependencySet: DependencySet<String>) {
+    dependencySet.getDependencies().forEach { add("api", it) }
 }
 
 fun DependencyHandler.compileOnlyAll(dependencySet: DependencySet<String>, isTransitive: Boolean = false) {
-    dependencySet.getDependencies().forEach {
-        if (isTransitive) {
-            compileOnlyTransitively(it)
-        } else {
-            add("compileOnly", it)
-        }
-    }
+    dependencySet.getDependencies().forEach { if (isTransitive) { compileOnlyTransitively(it) } else { add("compileOnly", it) } }
 }
 
 fun DependencyHandler.testImplementationAll(dependencySet: DependencySet<String>) {
-    dependencySet.getDependencies().forEach {
-        add("testImplementation", it)
-    }
+    dependencySet.getDependencies().forEach { add("testImplementation", it) }
 }
